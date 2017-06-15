@@ -1,26 +1,25 @@
-/* Work.java 
+/* Work.java
 */
-/* Work <- Record �N���X���p�� 
+/* Work <- Record クラスを継承
 */
 public class Work extends Record {
-    /** 
-    * �t�B�[���h 
+    /**
+    * フィールド
     */
-    private int personID; // �]�ƈ�ID 
-    private int clientID; // �ڋqID 
-    private String startTime; // �ғ��J�n�N���� 
+    private int personID; // 従業員ID
+    private int clientID; // 顧客ID
+    private String startTime; // 稼働開始年月日
+    private String endTime; // 稼働終了年月日
+    private int price; // 契約単価
 
-    private String endTime; // �ғ��I���N���� 
-    private int price; // �_��P�� 
-
-    /** �R���X�g���N�^ Work 
-    * @param int ID 
-    * @param int personID 
-    * @param int clientID 
-    * @param String startTime 
-    * @param String endTime 
-    * @param int price 
-    * @param boolean eraseFlag 
+    /** コンストラクタ Work
+    * @param int ID
+    * @param int personID
+    * @param int clientID
+    * @param String startTime
+    * @param String endTime
+    * @param int price
+    * @param boolean eraseFlag
     */
     Work(int ID, int personID, int clientID,
             String startTime, String endTime,
@@ -33,23 +32,23 @@ public class Work extends Record {
         this.price = price;
     }
 
-    /** �R���X�g���N�^ Work 
-    * @param String record 
-    * @throws Exception 
+    /** コンストラクタ Work
+    * @param String record
+    * @throws Exception
     */
     Work(String record) throws Exception {
         setData(record);
     }
 
-    /** setData 
-    * @param String record 
-    * @throws Exception 
+    /** setData
+    * @param String record
+    * @throws Exception
     */
     public void setData(String record) throws Exception {
-        String[] n = record.split(","); // ���R�[�h��","�ŕ��� 
+        String[] n = record.split(","); // レコードを","で分割
         try {
             if (n.length != 7)
-                throw new ArrayIndexOutOfBoundsException("�s���ȃ��R�[�h��ǂݍ��݂܂����B");
+                throw new ArrayIndexOutOfBoundsException("不正なレコードを読み込みました。");
             setID(Integer.parseInt(n[0]));
             personID = Integer.parseInt(n[1]);
             clientID = Integer.parseInt(n[2]);
@@ -64,26 +63,25 @@ public class Work extends Record {
                 throw new NumberFormatException();
         } catch (NumberFormatException e) {
             System.out.println
-                    ("���l�܂��͍폜�t���O�ɕϊ��ł��Ȃ��l�����R�[�h�Ɋ܂܂�Ă��܂��B");
+                    ("数値または削除フラグに変換できない値がレコードに含まれています。");
             throw e;
         }
     }
 
-    /** toString 
-    * @return String 
-    
+    /** toString
+    * @return String
     */
     public String toString() {
-        String ts = "ID:" + getID() + " �]�ƈ�ID:" + personID
-                + " �ڋqID:" + clientID
-                + " " + startTime + "�`" + endTime
-                + " �_��P��:" + price;
+        String ts = "ID:" + getID() + " 従業員ID:" + personID
+                + " 顧客ID:" + clientID
+                + " " + startTime + "～" + endTime
+                + " 契約単価:" + price;
         return ts;
     }
 
-    // ���ۃ��\�b�hwriteForCSV �̎��� 
-    /** writeForCSV 
-    * @return String 
+    // 抽象メソッドwriteForCSV の実装
+    /** writeForCSV
+    * @return String
     */
     public String writeForCSV() {
         String s = "" + getID() + "," + personID + "," + clientID +
@@ -92,65 +90,64 @@ public class Work extends Record {
         return s;
     }
 
-    /** getPersonID 
-    * @return int 
+    /** getPersonID
+    * @return int
     */
     public int getPersonID() {
         return personID;
     }
 
-    /** setPersonID 
-    * @param int personID 
+    /** setPersonID
+    * @param int personID
     */
     public void setPersonID(int personID) {
         this.personID = personID;
     }
 
-    /** getClientID 
-    * @return int 
+    /** getClientID
+    * @return int
     */
     public int getClientID() {
         return clientID;
     }
 
-    /** setClientID 
-    * @param int clientID 
+    /** setClientID
+    * @param int clientID
     */
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }
 
-    /** getStartTime 
-    * @return String 
+    /** getStartTime
+    * @return String
     */
     public String getStartTime() {
         return startTime;
     }
 
-    /** setStartTime 
-    * @param String startTime 
+    /** setStartTime
+    * @param String startTime
     */
     public void setStartTime(String startTime) {
         this.startTime = startTime;
-
     }
 
-    /** getEndTime 
-    * @return String 
+    /** getEndTime
+    * @return String
     */
     public String getEndTime() {
         return endTime;
     }
 
-    /** setEndTime 
-    * @param String endTime 
+    /** setEndTime
+    * @param String endTime
     */
     public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
-    /** setPrice 
-    * @param int price 
+    /** setPrice
+    * @param int price
     */
     public void setPrice(int price) {
         this.price = price;

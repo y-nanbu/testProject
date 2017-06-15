@@ -1,28 +1,26 @@
-/* RecordList.java 
+/* RecordList.java
 */
-/* RecordList 
+/* RecordList
 */
 interface RecordList {
-    // ���ۃ��\�b�h 
-    /** add 
-    * �������e�F���R�[�h��ǉ����� 
-    * @param String data 
-    * @throws Exception 
-    */
-    public abstract void add(String data) throws Exception;
-
-    // ���ۃ��\�b�h 
-    /** getRecord 
-    * �������e�F�w��C���f�b�N�X�̃��R�[�h���擾���� 
-    * @param int idx 
-    * @return Record 
-    */
-    public abstract Record getRecord(int idx);
-
-    // ���ۃ��\�b�h 
-    /** size 
-    * �������e�F���R�[�h�������擾���� 
-    * @return int 
-    */
-    public abstract int size();
+// 抽象メソッド
+/** add
+* 実装内容：レコードを追加する
+* @param String data
+* @throws Exception
+*/
+public abstract void add( String data ) throws Exception;
+// 抽象メソッド
+/** getRecord
+* 実装内容：指定インデックスのレコードを取得する
+* @param int idx
+* @return Record
+*/
+public abstract Record getRecord( int idx );
+// 抽象メソッド
+/** size
+* 実装内容：レコード件数を取得する
+* @return int
+*/
+public abstract int size();
 }

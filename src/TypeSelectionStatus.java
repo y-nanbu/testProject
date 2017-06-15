@@ -1,19 +1,19 @@
-/* TypeSelectionStatus.java 
+/* TypeSelectionStatus.java
 */
 import java.io.IOException;
 
-/* TypeSelectionStatus 
+/* TypeSelectionStatus
 */
 public class TypeSelectionStatus extends ConsoleStatus {
-    // �t�B�[���h 
+    // フィールド
     private DisplayPersonsByTypeStatus next;
 
-    /** 
-    * �R���X�g���N�^ TypeSelectionStatus 
-    * @param String firstMess 
-    * @param String promptMess 
-    * @param boolean IsEndStatus 
-    * @param DisplayPersonsByTypeStatus next 
+    /**
+    * コンストラクタ TypeSelectionStatus
+    * @param String firstMess
+    * @param String promptMess
+    * @param boolean IsEndStatus
+    * @param DisplayPersonsByTypeStatus next
     */
     TypeSelectionStatus(String firstMess, String promptMess,
             boolean IsEndStatus,
@@ -22,10 +22,10 @@ public class TypeSelectionStatus extends ConsoleStatus {
         this.next = next;
     }
 
-    // ���̏�ԂɑJ�ڂ��邱�Ƃ𑣂����߂̃��b�Z�[�W�̕\�� 
-    /** inputMessage 
-    * @throws IOException 
-    * @return String 
+    // 次の状態に遷移することを促すためのメッセージの表示
+    /** inputMessage
+    * @throws IOException
+    * @return String
     */
     public String inputMessage() throws IOException {
         String mess = super.inputMessage();
@@ -33,12 +33,12 @@ public class TypeSelectionStatus extends ConsoleStatus {
         return mess;
     }
 
-    // ���̃N���X�́C����DisplayPersonsByTypeStatus ���ĂԂ� 
-    // ���܂��Ă��邽�߁C������͂���Ă� 
-    // DisplayPersonsByTypeStatus �ɑJ�ڂ���悤�ɂ��Ă��� 
-    /** getNextStatus 
-    * @param String s 
-    * @return ConsoleStatus 
+    // このクラスは，次にDisplayPersonsByTypeStatus を呼ぶと
+    // 決まっているため，何が入力されても
+    // DisplayPersonsByTypeStatus に遷移するようにしている
+    /** getNextStatus
+    * @param String s
+    * @return ConsoleStatus
     */
     public ConsoleStatus getNextStatus(String s) {
         return next;
