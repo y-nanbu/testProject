@@ -1,14 +1,14 @@
-/* SystemManager.java 
+/* SystemManager.java
 */
-/* SystemManager 
+/* SystemManager
 */
 public class SystemManager {
-    /** 
-    * フィールド 
+    /**
+    * フィールド
     */
-    private PersonList plist; // 従業員のリスト 
-    private ClientList clist; // 顧客のリスト 
-    private WorkList wlist; // 稼働のリスト 
+    private PersonList plist; // 従業員のリスト
+    private ClientList clist; // 顧客のリスト
+    private WorkList wlist; // 稼働のリスト
     private String pfilename = "person.csv";
     private String cfilename = "client.csv";
     private String wfilename = "work.csv";
@@ -37,11 +37,11 @@ public class SystemManager {
         }
     }
 
-    /** 
-    * コンストラクタ SystemManager 
+    /**
+    * コンストラクタ SystemManager
     */
     SystemManager() {
-        // 従業員，顧客，稼働の各リストを作成 
+        // 従業員，顧客，稼働の各リストを作成
         this.plist = new PersonList();
         this.clist = new ClientList();
         this.wlist = new WorkList(this.clist);
@@ -49,12 +49,12 @@ public class SystemManager {
         statusSetting();
     }
 
-    // 状態遷移の設定 
-    /** 
-    * statusSetting 
+    // 状態遷移の設定
+    /**
+    * statusSetting
     */
     public void statusSetting() {
-        // システム起動時の，機能選択の状態 
+        // システム起動時の，機能選択の状態
         sts1 = new ConsoleStatus(
                 "_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/\n" +
                         " 従業員派遣管理システム\n" +
@@ -67,7 +67,7 @@ public class SystemManager {
                 "どの機能を実行しますか？\n[S,JI,JU,JD,KI,KD,X]>",
                 false
                 );
-        // 起動時から"S"入力時の状態 
+        // 起動時から"S"入力時の状態
         sts2 = new ConsoleStatus(
                 "検索方法を指定してください。\n" +
                         "N->氏名から検索 T->職種から検索\n" +
@@ -75,7 +75,7 @@ public class SystemManager {
                 "[N,T,E]>",
                 false
                 );
-        // 従業員ID を入力すると情報を表示する状態 
+        // 従業員ID を入力すると情報を表示する状態
         sts5 = new DisplayPersonStatus(
                 "",
                 "エンターキーを押すと検索結果一覧に戻ります。\n>",
@@ -88,7 +88,7 @@ public class SystemManager {
                 false,
                 wlist
                 );
-        // 職種から得た従業者リストを表示し，従業員ID を入力する状態 
+        // 職種から得た従業者リストを表示し，従業員ID を入力する状態
         sts4 = new DisplayPersonsByTypeStatus(
                 "",
                 "E->検索結果一覧終了（検索条件指定に戻る）[(従業員ID),E]>",
@@ -96,7 +96,7 @@ public class SystemManager {
                 plist,
                 sts5
                 );
-        // 職種名を入力する状態 
+        // 職種名を入力する状態
         sts3 = new TypeSelectionStatus(
                 "職種名を入力してください。\n",
                 "[(職種名)]>",
@@ -104,7 +104,7 @@ public class SystemManager {
                 sts4
 
                 );
-        // 氏名から得た従業者リストを表示し，従業員ID を入力する状態 
+        // 氏名から得た従業者リストを表示し，従業員ID を入力する状態
         sts7 = new DisplayPersonsByNameStatus(
                 "",
                 "E->検索結果一覧終了（検索条件指定に戻る）[(従業員ID),E]>",
@@ -112,49 +112,49 @@ public class SystemManager {
                 plist,
                 sts5_2
                 );
-        // 従業員の氏名を入力する状態 
+        // 従業員の氏名を入力する状態
         sts6 = new NameSelectionStatus(
                 "氏名を入力してください。\n",
                 "[(氏名)]>",
                 false,
                 sts7
                 );
-        // 従業員を追加する状態 
+        // 従業員を追加する状態
         sts8 = new AddPersonStatus(
                 "",
                 "エンターキーを押すとメニューに戻ります。>",
                 false,
                 plist
                 );
-        // 従業員の情報を更新する状態 
+        // 従業員の情報を更新する状態
         sts9 = new UpdatePersonStatus(
                 "",
                 "更新しました。\n エンターキーを押すとメニューに戻ります。>",
                 false,
                 plist
                 );
-        // 従業員を削除する状態 
+        // 従業員を削除する状態
         sts10 = new DeletePersonStatus(
                 "",
                 "この従業員情報を削除しますか？（Y はい N いいえ）[Y,N]>",
                 false,
                 plist
                 );
-        // 稼働を追加する状態 
+        // 稼働を追加する状態
         sts11 = new AddWorkStatus(
                 "",
                 "エンターキーを押すとメニューに戻ります。>",
                 false,
                 clist, wlist
                 );
-        // 稼働を削除する状態 
+        // 稼働を削除する状態
         sts12 = new DeleteWorkStatus(
                 "",
                 "この稼働情報を削除しますか？（Y はい N いいえ）[Y,N]>",
                 false,
                 plist, wlist
                 );
-        // システムを終了する状態 
+        // システムを終了する状態
 
         sts13 = new ExitStatus(
                 "",
@@ -182,37 +182,37 @@ public class SystemManager {
         sts12.setNextStatus(" ", sts1);
     }
 
-    // システムの起動 
-    /** run 
-    * @throws Exception 
+    // システムの起動
+    /** run
+    * @throws Exception
     */
     public void run() throws Exception {
-        // メインルーチン 
+        // メインルーチン
         ConsoleStatus sts = sts1;
         String cmd;
         while (!sts.getIsEndStatus()) {
-            // 最初に出力するメッセージ 
+            // 最初に出力するメッセージ
             sts.displayFirstMess();
-            // 次の状態に遷移することを促すためのメッセージ 
+            // 次の状態に遷移することを促すためのメッセージ
             sts.displayPromptMess();
-            // キー入力を受け付ける 
+            // キー入力を受け付ける
             cmd = sts.inputMessage();
-            // キー入力されたコマンドによって， 
-            // 次の状態に遷移する 
+            // キー入力されたコマンドによって，
+            // 次の状態に遷移する
             sts = sts.getNextStatus(cmd);
         }
-        // 終了状態になったら，その旨のメッセージを出力して 
-        // 終了（保存）処理を行う 
+        // 終了状態になったら，その旨のメッセージを出力して
+        // 終了（保存）処理を行う
         sts.displayFirstMess();
 
     }
 
-    // マスタファイルの読込み 
-    /** load 
-    * @throws Exception 
+    // マスタファイルの読込み
+    /** load
+    * @throws Exception
     */
     public void load() throws Exception {
-        // 各CSV ファイルからレコードを読み取る 
+        // 各CSV ファイルからレコードを読み取る
         FileLoader pload = new FileLoader(pfilename);
         FileLoader cload = new FileLoader(cfilename);
         FileLoader wload = new FileLoader(wfilename);
@@ -221,9 +221,9 @@ public class SystemManager {
         wload.read(wlist);
     }
 
-    // マスタファイルの保存 
-    /** save 
-    * @throws Exception 
+    // マスタファイルの保存
+    /** save
+    * @throws Exception
     */
     public void save() throws Exception {
         FileSaver psave = new FileSaver(pfilename);
